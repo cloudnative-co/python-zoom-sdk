@@ -26,13 +26,14 @@ def downloader(url, token):
         with urllib.request.urlopen(req) as res:
             content = res.read()
             headers = res.headers
+            contentLength = header["Content-Length"]
             if "Content-Type" in headers:
                 contentType = headers["Content-Type"]
                 if contentType == "application/octet-stream":
                     content = io.BytesIO(content)
                 elif contentType == "application/json":
                     content = content.decode("utf-8")
-            return content
+            return content, contentLength
     except urllib.error.HTTPError as e:
         ex = APIException(e)
         raise ex
