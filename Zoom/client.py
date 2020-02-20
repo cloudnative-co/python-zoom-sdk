@@ -62,7 +62,6 @@ class Client(object):
         else:
             payload = b""
 
-#        req = urllib.request.Request(url, headers=self.headers)
         req = urllib.request.Request(**args)
         try:
             with urllib.request.urlopen(req) as res:
