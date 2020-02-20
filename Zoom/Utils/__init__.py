@@ -26,7 +26,7 @@ def downloader(url, token):
         with urllib.request.urlopen(req) as res:
             content = res.read()
             headers = res.headers
-            contentLength = header["Content-Length"]
+            contentLength = headers["Content-Length"]
             if "Content-Type" in headers:
                 contentType = headers["Content-Type"]
                 if contentType == "application/octet-stream":
