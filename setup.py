@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="PythonSDK",
+    name="ZoomSDK",
     version="0.0.1",
     description="Python SDK for Python 3.6",
     author="sebastian",
