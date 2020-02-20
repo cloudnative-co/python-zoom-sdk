@@ -32,7 +32,9 @@ def downloader(url, token):
                 if contentType == "application/octet-stream":
                     content = io.BytesIO(content)
                 elif contentType == "application/json":
-                    content = content.decode("utf-8")
+                    content = io.StringIO(content.decode("utf-8"))
+                else contentType == "txt;charset=UTF-8":
+                    content = io.StringIO(content.decode("utf-8"))
             return content, contentLength
     except urllib.error.HTTPError as e:
         ex = APIException(e)
