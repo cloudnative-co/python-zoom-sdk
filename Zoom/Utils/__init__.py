@@ -4,13 +4,21 @@ import io
 import urllib.request
 
 
-def get_arguments(args: dict):
+def get_arguments(args: dict, keys: list = None, ignores: list = None):
     ret = {}
     for ky in args:
         if ky == "self":
             continue
+        if keys is not None:
+            if ky not in keys:
+                continue
+        if ignores is not None:
+            if ky in ignores:
+                continue
         if args[ky] is not None:
             ret[ky] = args[ky]
+    if len(ret) == 0:
+        return None
     return ret
 
 

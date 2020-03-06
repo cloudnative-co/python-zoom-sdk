@@ -31,6 +31,137 @@ Schemas = {
             }
         }
     },
+    "Users.get": {
+        "type": "object",
+        "required": [
+            "userId"
+        ],
+        "properties": {
+            "userId": {
+                "type": "string",
+                "description": "The user ID or email address of the user."
+            },
+            "login_type": {
+                "type": "string",
+                "enum": [
+                    "0",
+                    "1",
+                    "99",
+                    "100",
+                    "101"
+                ],
+                "description": "`0` - Facebook.<br>`1` - Google.<br>`99` - API.<br>`100` - Zoom.<br>`101` - SSO.",
+            }
+        }
+    },
+    "Users.update": {
+        "type": "object",
+        "description": "The user update object represents a user on Zoom.",
+        "required": [
+            "userId"
+        ],
+        "properties": {
+            "userId": {
+                "type": "string",
+                "description": "The user ID or email address of the user."
+            },
+            "login_type": {
+                "type": "string",
+                "enum": [
+                    "0",
+                    "1",
+                    "99",
+                    "100",
+                    "101"
+                ],
+                "description": "`0` - Facebook.<br>`1` - Google.<br>`99` - API.<br>`100` - Zoom.<br>`101` - SSO."
+            },
+            "first_name": {
+                "type": "string",
+                "description": "User's first name. Cannot contain more than 5 Chinese characters.",
+                "maxLength": 64
+            },
+            "last_name": {
+                "type": "string",
+                "description": "User's last name. Cannot contain more than 5 Chinese characters.",
+                "maxLength": 64
+            },
+            "type": {
+                "type": "integer",
+                "enum": [
+                    1,
+                    2,
+                    3
+                ],
+                "x-enum-descriptions": [
+                    "Basic",
+                    "Licensed",
+                    "On-prem"
+                ],
+                "description": "User types:<br>`1` - Basic.<br>`2` - Licensed.<br>`3` - On-prem."
+            },
+            "pmi": {
+                "type": "integer",
+                "description": "Personal meeting ID: length must be 10.",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "use_pmi": {
+                "type": "boolean",
+                "description": "Use Personal Meeting ID for instant meetings.",
+                "default": False
+            },
+            "timezone": {
+                "type": "string",
+                "description": "The time zone ID for a user profile. For this parameter value please refer to the ID value in the [timezone](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#timezones) list."
+            },
+            "language": {
+                "type": "string",
+                "description": "language"
+            },
+            "dept": {
+                "type": "string",
+                "description": "Department for user profile: use for report."
+            },
+            "vanity_name": {
+                "type": "string",
+                "description": "Personal meeting room name."
+            },
+            "host_key": {
+                "type": "string",
+                "description": "Host key. It should be a 6-10 digit number.",
+                "minLength": 6,
+                "maxLength": 10
+            },
+            "cms_user_id": {
+                "type": "string",
+                "description": "Kaltura user ID."
+            },
+            "job_title": {
+                "type": "string",
+                "description": "User's job title.",
+                "maxLength": 128
+            },
+            "company": {
+                "type": "string",
+                "description": "User's company.",
+                "maxLength": 255
+            },
+            "location": {
+                "type": "string",
+                "description": "User's location.",
+                "maxLength": 256
+            },
+            "phone_number": {
+                "type": "string",
+                "description": "Phone number of the user. To update a phone number, you must also provide the `phone_country` field."
+            },
+            "phone_country": {
+                "type": "string",
+                "description": "[Country ID](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#countries) of the phone number. For example, if the phone number provided in the `phone_number` field is a Brazil based number, the value of the `phone_country` field should be `BR`."
+            }
+        }
+    },
     "Users.meetings": {
         "type": "object",
         "required": [

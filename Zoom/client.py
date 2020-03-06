@@ -55,17 +55,20 @@ class Client(object):
             url = "{}?{}".format(url, urllib.parse.urlencode(query))
         args = {
             "url": url,
-            "headers": self.headers
+            "headers": self.headers,
+            "method": method.upper()
         }
         if payload is not None:
-            payload = urllib.parse.urlencode(payload).encode("utf-8")
+            payload = json.dumps(payload).encode('utf-8')
+            args["data"] = payload
         else:
             payload = b""
-
         req = urllib.request.Request(**args)
         try:
             with urllib.request.urlopen(req) as res:
                 body = res.read().decode("utf-8")
+                if body is "" or body is None:
+                    return body
                 if to_dict:
                     return json.loads(body)
                 else:
