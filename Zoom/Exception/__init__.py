@@ -11,7 +11,6 @@ class APIException(urllib.error.HTTPError):
         self.fp = e.fp
         self.filename = e.filename
         body = e.read().decode("utf-8")
-        print(body)
         body = json.loads(body)
         self.msg = body["message"]
         self.code = body["code"]
